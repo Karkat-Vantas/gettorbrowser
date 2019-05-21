@@ -30,13 +30,7 @@ job:
       echo "No new releases"
     else
       git push -f --follow-tags origin releases
-      
-    fi
-    if [ $(git tag github -l "$version") ]; then
-      echo "No new releases"
-    else
-      git tag -a $version -m "Release of version ${version}"
-      git push --tags github  
+      git push -f --follow-tags github torbrowser-releases
     fi
 
     
