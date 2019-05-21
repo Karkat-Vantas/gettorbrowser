@@ -19,5 +19,5 @@ job:
     wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux64-$version\_en-US.tar.xz.asc
     git add .
     git commit -m '[dist ci] commit from CI runner - update with new torbrowser downloads'
-    git push --follow-tags origin releases
+    git push -f --follow-tags origin releases
     
