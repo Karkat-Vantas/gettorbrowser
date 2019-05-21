@@ -30,7 +30,15 @@ job:
       echo "No new releases"
     else
       git push -f --follow-tags origin releases
+    fi
+    
+    git fetch --all
+    git checkout -b torbrowser-releases
+    
+    if [ -z $(git status --porcelain) ];
+    then
+      echo "No new releases"
+    else
       git push -f --follow-tags github torbrowser-releases
     fi
-
     
