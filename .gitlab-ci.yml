@@ -7,7 +7,7 @@ before_script:
 job:
   script: |
     git checkout -B releases
-    rm torbrowser-* TorBrowser-* tor-browser-*
+    rm -f torbrowser-* TorBrowser-* tor-browser-*
     content=$(wget https://www.torproject.org/projects/torbrowser/RecommendedTBBVersions/ -q -O -) && arr=(`echo ${content//&#34;}`) && version=${arr[1]//,}
     wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-$version\_en-US.exe     
     wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-win64-$version\_en-US.exe.asc
