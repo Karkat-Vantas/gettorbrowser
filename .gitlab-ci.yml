@@ -1,0 +1,23 @@
+before_script:
+  - apt-get update -qq && apt-get install -y -qq wget 
+  - git remote set-url origin https://USERNAME:${CI_PUSH_TOKEN}@gitlab.com/thetorproject/gettorbrowser.git
+  - git config --global user.email 'silvia@nopressure.co.uk'
+  - git config --global user.name 'hiromipaw'
+
+job:
+  script: |
+    git checkout -B releases
+    rm torbrowser-* TorBrowser-* tor-browser-*
+    content=$(wget https://www.torproject.org/projects/torbrowser/RecommendedTBBVersions/ -q -O -) && arr=(`echo ${content//&#34;}`) && version=${arr[1]//,}
+    wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-$version\_en-US.exe     
+    wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-win64-$version\_en-US.exe.asc
+    wget https://www.torproject.org/dist/torbrowser/$version/TorBrowser-$version-osx64_en-US.dmg
+    wget https://www.torproject.org/dist/torbrowser/$version/TorBrowser-$version-osx64_en-US.dmg.asc
+    wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux32-$version\_en-US.tar.xz
+    wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux32-$version\_en-US.tar.xz.asc
+    wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux64-$version\_en-US.tar.xz
+    wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux64-$version\_en-US.tar.xz.asc
+    git add .
+    git commit -m '[dist ci] commit from CI runner - update with new torbrowser downloads'
+    git push --follow-tags origin releases
+    
