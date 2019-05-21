@@ -8,7 +8,11 @@ job:
   script: |
     git checkout -B releases
     rm -f torbrowser-* TorBrowser-* tor-browser-*
-    content=$(wget https://www.torproject.org/projects/torbrowser/RecommendedTBBVersions/ -q -O -) && arr=(`echo ${content//&#34;}`) && version=${arr[1]//,}
+    
+    content=$(wget https://www.torproject.org/projects/torbrowser/RecommendedTBBVersions/ -q -O -) && \
+    temp="${content//\"}" && temp="${temp//\[}" && temp="${temp//\]}" && \
+    arr=(`echo ${temp//,}`) && version=${arr[0]}
+    
     wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-$version\_en-US.exe     
     wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-win64-$version\_en-US.exe.asc
     wget https://www.torproject.org/dist/torbrowser/$version/TorBrowser-$version-osx64_en-US.dmg
@@ -17,6 +21,7 @@ job:
     wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux32-$version\_en-US.tar.xz.asc
     wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux64-$version\_en-US.tar.xz
     wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux64-$version\_en-US.tar.xz.asc
+    
     git add .
     git commit -m '[dist ci] commit from CI runner - update with new torbrowser downloads'
     git push -f --follow-tags origin releases
