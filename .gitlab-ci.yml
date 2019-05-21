@@ -34,7 +34,6 @@ job:
     
     git fetch --all
     git checkout -b torbrowser-releases
-    git push -f --follow-tags github torbrowser-releases
 
     if [ -z $(git status --porcelain) ];
     then
