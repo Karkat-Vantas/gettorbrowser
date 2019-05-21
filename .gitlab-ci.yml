@@ -1,7 +1,7 @@
 before_script:
   - apt-get update -qq && apt-get install -y -qq wget 
   - git remote set-url origin https://USERNAME:${CI_PUSH_TOKEN}@gitlab.com/thetorproject/gettorbrowser.git
-  - git remote set-url github https://${SECURE_TOKEN}@github.com/TheTorProject/gettorbrowser.git
+  - git remote add github https://${SECURE_TOKEN}@github.com/TheTorProject/gettorbrowser.git
   - git config --global user.email 'silvia@nopressure.co.uk'
   - git config --global user.name 'hiromipaw'
 
