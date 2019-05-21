@@ -24,5 +24,10 @@ job:
     
     git add .
     git commit -m '[dist ci] commit from CI runner - update with new torbrowser downloads'
+  if [ -z $(git status --porcelain) ];
+  then
+    echo "No new releases"
+    else
     git push -f --follow-tags origin releases
+  fi
     
