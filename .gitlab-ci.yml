@@ -29,7 +29,7 @@ job:
     
     git add .
     git commit -m '[dist ci] commit from CI runner - update with new torbrowser downloads'
-    diffs=$(git diff master origin/master)
+    diffs=$(git diff origin/releases)
     if [ -z "$diffs" ]
       echo "No new releases"
     else
@@ -39,7 +39,7 @@ job:
     git fetch --all
     git checkout -b torbrowser-releases
 
-    diffs=$(git diff master github/master)
+    diffs=$(git diff github/torbrowser-releases)
     if [ -z "$diffs" ]
       echo "No new releases"
     else
