@@ -12,7 +12,7 @@ job:
     
     content=$(wget https://www.torproject.org/projects/torbrowser/RecommendedTBBVersions/ -q -O -) && \
     temp="${content//\"}" && temp="${temp//\[}" && temp="${temp//\]}" && \
-    arr=(`echo ${temp//,}`) && version=${arr[4]}
+    arr=(`echo ${temp//,}`) && version=${arr[0]}
     
     locales=(en-US es-ES pt-BR)
     for i in "${locales[@]}" 
