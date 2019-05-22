@@ -15,7 +15,8 @@ job:
     arr=(`echo ${temp//,}`) && version=${arr[4]}
     
     locales=(en-US es-ES pt-BR)
-    for i in "${locales[@]}" do 
+    for i in "${locales[@]}" 
+    do 
         wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-$version\_$i.exe     
         wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-win64-$version\_$i.exe.asc
         wget https://www.torproject.org/dist/torbrowser/$version/TorBrowser-$version-osx64_$i.dmg
