@@ -31,9 +31,9 @@ job:
     git commit -m '[dist ci] commit from CI runner - update with new torbrowser downloads'
     diffs=$(git diff origin/releases)
     if [ -z "$diffs" ]; then
-        git push -f --follow-tags origin releases
-    else
         echo "No new releases"
+    else
+        git push -f --follow-tags origin releases
     fi
     
     git fetch --all
@@ -41,8 +41,8 @@ job:
 
     diffs=$(git diff github/torbrowser-releases)
     if [ -z "$diffs" ]; then
-        git push -f --follow-tags github torbrowser-releases
-    else
         echo "No new releases"
+    else
+        git push -f --follow-tags github torbrowser-releases
     fi
     
