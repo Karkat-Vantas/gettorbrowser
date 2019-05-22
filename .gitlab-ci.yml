@@ -12,7 +12,7 @@ job:
     
     content=$(wget https://www.torproject.org/projects/torbrowser/RecommendedTBBVersions/ -q -O -) && \
     temp="${content//\"}" && temp="${temp//\[}" && temp="${temp//\]}" && \
-    arr=(`echo ${temp//,}`) && version=${arr[0]}
+    arr=(`echo ${temp//,}`) && version=${arr[4]}
     
     wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-$version\_en-US.exe     
     wget https://www.torproject.org/dist/torbrowser/$version/torbrowser-install-win64-$version\_en-US.exe.asc
