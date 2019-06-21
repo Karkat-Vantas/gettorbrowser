@@ -12,7 +12,7 @@ job:
     
     content=$(wget https://www.torproject.org/projects/torbrowser/RecommendedTBBVersions/ -q -O -) && \
     temp="${content//\"}" && temp="${temp//\[}" && temp="${temp//\]}" && \
-    arr=(`echo ${temp//,}`) && version=${arr[0]}
+    arr=(`echo ${temp//,}`) && alpha="${arr[@]: -4:1}" && version="${arr[@]: -12:1}"
     
     locales=(en-US es-ES pt-BR)
     for i in "${locales[@]}" 
@@ -25,6 +25,15 @@ job:
         wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux32-$version\_$i.tar.xz.asc
         wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux64-$version\_$i.tar.xz
         wget https://www.torproject.org/dist/torbrowser/$version/tor-browser-linux64-$version\_$i.tar.xz.asc
+        
+        wget https://www.torproject.org/dist/torbrowser/$alpha/torbrowser-install-$alpha\_$i.exe     
+        wget https://www.torproject.org/dist/torbrowser/$alpha/torbrowser-install-win64-$alpha\_$i.exe.asc
+        wget https://www.torproject.org/dist/torbrowser/$alpha/TorBrowser-$alpha-osx64_$i.dmg
+        wget https://www.torproject.org/dist/torbrowser/$alpha/TorBrowser-$alpha-osx64_$i.dmg.asc
+        wget https://www.torproject.org/dist/torbrowser/$alpha/tor-browser-linux32-$alpha\_$i.tar.xz
+        wget https://www.torproject.org/dist/torbrowser/$alpha/tor-browser-linux32-$alpha\_$i.tar.xz.asc
+        wget https://www.torproject.org/dist/torbrowser/$alpha/tor-browser-linux64-$alpha\_$i.tar.xz
+        wget https://www.torproject.org/dist/torbrowser/$alpha/tor-browser-linux64-$alpha\_$i.tar.xz.asc
     done
     
     git add .
